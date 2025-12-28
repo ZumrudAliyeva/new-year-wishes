@@ -19,8 +19,295 @@
   }
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.safe-area {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Steam animation styles */
+/* ☕ Steam animation */
+.steam {
+  position: absolute;
+  bottom:78%;
+  left: 30%;
+  pointer-events: none;
+  width: 40px;
+  height: 30px;
+  overflow: visible;
+  animation: sway 4s infinite ease-in-out;
+}
+
+.steam span {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(2px);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: rise 3s infinite ease-out;
+  opacity: 0;
+  filter: blur(3px);
+}
+
+.steam span:nth-child(1) { animation-delay: 0s; transform: translateX(-10px) scale(1.2); }
+.steam span:nth-child(2) { animation-delay: 0.6s; transform: translateX(4px) scale(0.9); }
+.steam span:nth-child(3) { animation-delay: 1.2s; transform: translateX(-4px) scale(1.1); }
+.steam span:nth-child(4) { animation-delay: 1.8s; transform: translateX(8px) scale(0.8); }
+
+@keyframes rise {
+  0% {
+    bottom: 0;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 40px;
+    opacity: 0;
+    transform: translateX(calc(-50% + var(--x, 0px))) scale(1.5);
+  }
+}
+
+@keyframes sway {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  50% { transform: translateX(-50%) translateY(-2px) rotate(2deg); }
+}
+
+/* Flame animation styles */
+
+.fire-container {
+  @apply w-42.5 h-42.5 md:w-42.5 md:h-42.5 xl:w-62.5 xl:h-62.5 absolute top-1/2 -translate-y-1/2 pointer-events-none;
+  left:30%;
+}
+
+.flame {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  left:50%;
+  animation: flameMove 0.8s infinite ease-in-out alternate;
+}
+
+@keyframes flameMove {
+  0% { transform: translateX(-50%) scaleY(1); }
+  100% { transform: translateX(-50%) scaleY(1.22); }
+}
+
+/* Glow effect */
+.flame::after {
+  content: "";
+  @apply absolute left-1/2 -translate-x-1/2 bottom-0 rounded-full opacity-60;
+  width: 120px;
+  height: 80px;
+  background: rgba(255, 140, 0, 0.6);
+  filter: blur(26px);
+  animation: glowPulse 1s infinite ease-in-out alternate;
+  z-index: -1;
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.4; transform: translateX(-50%) scale(0.95); }
+  100% { opacity: 0.9; transform: translateX(-50%) scale(1.15); }
+}
+
+/* Flame core layers */
+.flame span {
+  @apply absolute left-1/2 -translate-x-1/2 bottom-0 rounded-full opacity-80;
+}
+
+.flame span:nth-child(1) {
+  width: 65px;
+  height: 65px;
+  background: rgba(255, 90, 0, 0.6);
+  filter: blur(20px);
+  animation: flicker1 0.7s infinite alternate;
+}
+
+.flame span:nth-child(2) {
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 180, 0, 0.5);
+  filter: blur(14px);
+  animation: flicker2 0.9s infinite alternate;
+}
+
+.flame span:nth-child(3) {
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.4);
+  filter: blur(6px);
+  animation: flicker3 1.1s infinite alternate;
+}
+
+@keyframes flicker1 {
+  0% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+}
+
+@keyframes flicker2 {
+  0% { opacity: 0.6; transform: translateX(-50%) scale(0.95); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.25); }
+}
+
+@keyframes flicker3 {
+  0% { opacity: 0.3; transform: translateX(-50%) scale(0.9); }
+  100% { opacity: 0.7; transform: translateX(-50%) scale(1.3); }
+}
+
+/* Sparks (qığılcımlar) */
+.sparks {
+  @apply absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none;
+  width: 160px;
+  height: 90px;
+  overflow: visible;
+}
+
+.sparks i {
+  @apply absolute rounded-full opacity-70;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 200, 80, 0.9);
+  animation: sparkFly 1.3s infinite ease-out;
+}
+
+.sparks i:nth-child(1) { left: 10%; animation-delay: 0s; }
+.sparks i:nth-child(2) { left: 18%; animation-delay: 0.2s; }
+.sparks i:nth-child(3) { left: 26%; animation-delay: 0.4s; }
+.sparks i:nth-child(4) { left: 72%; animation-delay: 0.15s; }
+.sparks i:nth-child(5) { left: 80%; animation-delay: 0.35s; }
+.sparks i:nth-child(6) { left: 88%; animation-delay: 0.55s; }
+.sparks i:nth-child(7) { left: 64%; animation-delay: 0.7s; }
+.sparks i:nth-child(8) { left: 36%; animation-delay: 0.9s; }
+
+@keyframes sparkFly {
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-70px) scale(0.3); opacity: 0; }
+}
+
+/* Tree sparkle lights */
+.triangle-mask {
+  position: relative;
+
+  clip-path: polygon(
+    30% 0%,
+    70% 0%, 
+    100% 100%, 
+    0% 100% 
+  );
+    -webkit-clip-path: polygon(
+    30% 0%,
+    70% 0%, 
+    100% 100%, 
+    0% 100% 
+  );
+
+  overflow: hidden;
+}
+
+.fairy-sparkle {
+  position: absolute;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 230, 150, 0.9) 50%,
+    rgba(255, 200, 80, 0.7) 100%
+  );
+
+  box-shadow: 0 0 6px rgba(255, 220, 120, 0.9);
+  filter: blur(0.3px);
+
+  animation-name: fairySparkle;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes fairySparkle {
+  0% {
+    transform: translateX(0) scale(0.9);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateX(var(--drift)) scale(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(0.9);
+    opacity: 0.4;
+  }
+}
+
+
+
+
+/* Snowflake styles */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.4)
+  );
+
+  animation-name: snow-fall-wind;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  will-change: transform;
+}
+
+@keyframes snow-fall-wind {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+  }
+
+  50% {
+    transform: translateY(50vh) translateX(calc(var(--drift) * 0.6));
+  }
+
+  100% {
+    transform: translateY(110vh) translateX(var(--drift));
+  }
+}
+
+
+
+
+
+/* responsive */
+@media (min-width: 1400px) {
+  .steam {
+  width: 80px;
+  height: 70px;
+}
+
+.steam span {
+  width: 16px;
+  height: 16px;
+  filter: blur(8px);
+}
 }
