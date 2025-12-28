@@ -1,7 +1,7 @@
-import { fortunes } from "@/constants/fortunes";
+import { FORTUNES } from "@/constants/fortunes";
 
 export function getRandomFortune(exclude: string[] = []) {
-  const available = fortunes.filter(
+  const available = FORTUNES.filter(
     (f) => !exclude.includes(f)
   );
 
