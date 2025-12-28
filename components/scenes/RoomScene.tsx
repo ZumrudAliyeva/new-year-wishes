@@ -103,13 +103,13 @@ const handleSelectFood = async (food: string) => {
             return (
               <motion.div
                 key={food.name}
-                className="cursor-pointer relative w-[120px] md:w-[160px] xl:w-[222px] flex flex-col justify-end items-center"
+                className="cursor-pointer relative w-[120px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] flex flex-col justify-end items-center"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 1.0 }}
                 onClick={() => handleSelectFood(food.name)}
               >
                 <p className="m-w-[180px] text-sm text-center mb-3 p-4 bg-black/20 backdrop-blur-md rounded-xl">{food.text}</p>
-                <div className="relative w-[120px] md:w-[160px] xl:w-[222px]">
+                <div className="relative w-[120px] md:w-[180px] xl:w-[222px] 2xl:w-[333px]">
                 <div className="steam">
                   <span></span>
                   <span></span>
@@ -119,7 +119,7 @@ const handleSelectFood = async (food: string) => {
                 <img
                   src={food.img}
                   alt={food.name}
-                  className="w-[111px] md:w-[180px] xl:w-[333px] mt-auto"
+                  className="w-[111px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] mt-auto"
                 />
                 </div>
               </motion.div>
@@ -129,7 +129,7 @@ const handleSelectFood = async (food: string) => {
         {/* Seçilən food hələ stol üzərində qalır */}
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-8 w-1/2 items-end">
         {selectedFood && (
-          <div className="cursor-pointer relative w-[111px] md:w-[160px] xl:w-[222px] flex flex-col justify-end items-center">
+          <div className="cursor-pointer relative w-[111px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] flex flex-col justify-end items-center">
             <div className="steam">
               <span></span>
               <span></span>
@@ -139,7 +139,7 @@ const handleSelectFood = async (food: string) => {
             <img
               src={foodOptions.find((f) => f.name === selectedFood)?.img}
               alt={selectedFood}
-              className="w-[111px] md:w-[160px] xl:w-[222px] mt-auto"
+              className="w-[111px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] mt-auto"
             />
           </div>
         )}

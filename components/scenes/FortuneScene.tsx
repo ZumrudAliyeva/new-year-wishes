@@ -104,7 +104,7 @@ useEffect(() => {
           <img
             src="/scene3/gift_sack.webp"
             alt="gift"
-            className="w-[111px] md:w-[200px] xl:w-[333px]"
+            className="w-[111px] md:w-[200px] xl:w-[222px] 2xl:w-[333px]"
           />
           <button
             onClick={handleFortuneClick}
