@@ -79,7 +79,7 @@ export default function RoomScene({
 
   return (
     <>
-      <div className="relative h-auto min-h-screen w-full text-white overflow-hidden">
+      <div className="relative h-full min-h-screen w-full text-white overflow-hidden">
         {/* Background + otaq elementləri */}
         {mounted && (
           <img
@@ -107,7 +107,7 @@ export default function RoomScene({
           <img
             src={bg_table}
             alt="Table"
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full w-10/12"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full md:w-10/12"
           />
         )}
         {/* Fire animation */}
@@ -129,8 +129,9 @@ export default function RoomScene({
           </div>
         </div>
         {/* Food seçimləri - fade out yalnız digərlərinə */}
+        <div className="absolute top-0 left-0 w-full h-full">
         {isPortrait ? (
-          <div className="w-full h-full absolute top-0 left-0">
+          <div className="w-full h-full">
             <div className="absolute left-1/2 top-1/2 w-11/12 transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-6">
               {foodOptions.map((food) => {
                 if (selectedFood) return null;
@@ -144,7 +145,7 @@ export default function RoomScene({
                 );
               })}
             </div>
-            <div className="absolute bottom-2 left-1/2 w-11/12 transform -translate-x-1/2 flex gap-2 px-2 w-full items-end justify-center">
+            <div className="absolute bottom_position left-1/2 md:w-11/12 transform -translate-x-1/2 flex gap-2 px-2 w-full items-end justify-center">
               {foodOptions.map((food) => {
                 if (selectedFood) return null;
                 return (
@@ -174,7 +175,7 @@ export default function RoomScene({
             </div>
           </div>
         ) : (
-          <div className="absolute bottom-2 left-1/2 w-10/12 transform -translate-x-1/2 flex gap-6 md:gap-8 w-full items-end justify-center">
+          <div className="absolute bottom_position left-1/2 w-10/12 transform -translate-x-1/2 flex gap-6 md:gap-8 md:w-full items-end justify-center">
             {foodOptions.map((food) => {
               if (selectedFood) return null;
               return (
@@ -207,7 +208,7 @@ export default function RoomScene({
           </div>
         )}
         {/* Seçilən food hələ stol üzərində qalır */}
-        <div className="w-10/12 absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-8 w-1/2 items-end">
+        <div className={`${isPortrait ? "w-10/12" : "w-1/2"} absolute bottom_position left-1/2 transform -translate-x-1/2 flex gap-8 items-end`}>
           {selectedFood && (
             <div className="cursor-pointer relative w-[130px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] flex flex-col justify-end items-center">
               <div className="steam">
@@ -234,6 +235,7 @@ export default function RoomScene({
             />
           </div>
         )}
+        </div>
       </div>
     </>
   );

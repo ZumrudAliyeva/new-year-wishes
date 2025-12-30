@@ -1,5 +1,6 @@
 "use client";
 
+import { useIsPortrait } from "@/hooks/useOriantation";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -17,6 +18,8 @@ export default function FortuneScene({ userId, userName, onFinish }: Props) {
   const [introVisible, setIntroVisible] = useState(true);
   const [formVisible, setFormVisible] = useState(false);
   const [closing, setClosing] = useState(false);
+
+  const isPortrait = useIsPortrait();
 
 
 useEffect(() => {
@@ -87,7 +90,7 @@ useEffect(() => {
 
   return (
     <div className={`
-    transition-all duration-800 ease-in-out
+    transition-all duration-700 ease-in-out
     ${closing ? "opacity-0 translate-y-4 blur-sm" : "opacity-100"}
   `}
 >
@@ -99,7 +102,7 @@ useEffect(() => {
         `}>
         Dilək dilə, hədiyyə torbasına toxun və yeni il üçün mesajını al. 3 dilək haqqın var.
       </p>
-      <div className="w-10/12 absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-8 w-1/2 items-end justify-end">
+      <div className={`${isPortrait ? "w-10/12" : "w-1/2"} absolute bottom_position left-1/2 transform -translate-x-1/2 flex gap-8 items-end justify-end`}>
         <div className="relative w-[160px] md:w-[200px] xl:w-[333px]">
           <img
             src="/scene3/gift_sack.webp"
