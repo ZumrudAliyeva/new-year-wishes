@@ -72,7 +72,7 @@ export default function DoorScene({ onSuccess }: Props) {
         />
       )}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center w-full h-full">
-        <div className="absolute left-1/2 top-2/5 transform -translate-x-1/2 -translate-y-2/5 w-[111px] h-[111px] md:w-[200px] md:h-[200px] 2xl:w-[333px] 2xl:h-[333px]flex flex-col items-center">
+        <div className="absolute left-1/2 top-2/6 md:top-2/5 transform -translate-x-1/2 -translate-y-2/6 md:-translate-y-2/5 w-[160px] h-[160px] md:w-[200px] md:h-[200px] 2xl:w-[333px] 2xl:h-[333px] flex flex-col items-center">
           <motion.img
             src="/scene1/christmas_wreath.webp"
             alt="happy new year"
