@@ -92,19 +92,19 @@ useEffect(() => {
   `}
 >
       <p className={`
-          w-3/4 max-w-[500px] absolute top-8 left-1/2 -translate-x-1/2
+         w-11/12 md:w-3/4 max-w-[500px] absolute top-8 left-1/2 -translate-x-1/2
           bg-black/20 p-6 rounded-xl backdrop-blur-md text-center
           transition-opacity duration-700
           ${introVisible ? "opacity-100" : "opacity-0 pointer-events-none"}
         `}>
         Dilək dilə, hədiyyə torbasına toxun və yeni il üçün mesajını al. 3 dilək haqqın var.
       </p>
-      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-8 w-1/2 items-end justify-end">
-        <div className="relative w-[111px] md:w-[200px] xl:w-[333px]">
+      <div className="w-10/12 absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-8 w-1/2 items-end justify-end">
+        <div className="relative w-[160px] md:w-[200px] xl:w-[333px]">
           <img
             src="/scene3/gift_sack.webp"
             alt="gift"
-            className="w-[111px] md:w-[200px] xl:w-[222px] 2xl:w-[333px]"
+            className="w-[160px] md:w-[200px] xl:w-[222px] 2xl:w-[333px]"
           />
           <button
             onClick={handleFortuneClick}
@@ -115,7 +115,7 @@ useEffect(() => {
           </button>
         </div>
       </div>
-      <div className="w-3/4 max-w-[500px] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4">
+      <div className="w-11/12 md:w-3/4 max-w-[500px] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4">
       {
         selectedFortunes.length > 0 && (
 

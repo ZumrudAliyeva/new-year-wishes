@@ -8,7 +8,6 @@ import RoomScene from "@/components/scenes/RoomScene";
 import FortuneScene from "@/components/scenes/FortuneScene";
 import { Scene } from "@/types";
 import { useIsPortrait } from "@/hooks/useOriantation";
-import RotateOverlay from "@/components/scenes/RotateOverlay";
 import { useAppHeight } from "@/hooks/useAppHeight";
 
 const sceneVariants = {
@@ -34,12 +33,8 @@ export default function HomePage() {
     setSelectedFood(null);
   };
 
-  if (isPortrait) {
-    return <RotateOverlay />;
-  }
-
   return (
-    <div  style={{ height: appHeight }} className="w-full overflow-hidden safe-area">
+    <div className="w-full overflow-x-hidden safe-area">
     <AnimatePresence mode="wait">
       {scene === "door" && (
         <motion.div
@@ -49,7 +44,7 @@ export default function HomePage() {
           animate="animate"
           exit="exit"
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="h-screen w-full overflow-hidden"
+          className="min-h-[100svh] h-full w-full overflow-x-hidden"
         >
           <DoorScene
             onSuccess={(id, name) => {
@@ -69,7 +64,7 @@ export default function HomePage() {
           animate="animate"
           exit="exit"
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="h-screen w-full overflow-hidden"
+          className="min-h-[100svh] h-full w-full overflow-x-hidden"
         >
           <RoomScene
             userId={userId}
@@ -88,7 +83,7 @@ export default function HomePage() {
           animate="animate"
           exit="exit"
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="h-screen w-full overflow-hidden"
+          className="min-h-[100svh] h-full w-full overflow-x-hidden"
         >
           <FortuneScene
             userId={userId}

@@ -30,7 +30,7 @@ export default function Snowfall({ count = 80 }: { count?: number }) {
   );
 
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden z-10">
+    <div className="pointer-events-none fixed inset-0 overflow-hidden z-10">
       {flakes.map((f) => {
         const style: SnowflakeStyle = {
           left: `${f.left}%`,

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useIsPortrait } from "@/hooks/useOriantation";
 
 const Snowfall = dynamic(() => import("./SnowFall"), {
   ssr: false,
@@ -17,6 +18,17 @@ export default function DoorScene({ onSuccess }: Props) {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isPortrait = useIsPortrait();
+
+  const bg = isPortrait
+    ? "/scene1/outside_bg_mobile.webp"
+    : "/scene1/outside_bg.webp";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -51,12 +63,16 @@ export default function DoorScene({ onSuccess }: Props) {
   }
 
   return (
-    <div className="relative h-screen w-full bg-black text-white overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-[url('/scene1/outside_bg.webp')] bg-cover bg-center" />
-      {/* Door area */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full">
-        <div className="absolute w-[111px] h-[111px] md:w-[200px] md:h-[200px] 2xl:w-[333px] 2xl:h-[333px] left-1/2 top-2/5  transform -translate-x-1/2 -translate-y-2/5 flex flex-col items-center">
+    <div className="relative h-auto min-h-screen w-full bg-black text-white overflow-hidden">
+      {mounted && (
+        <img
+          src={bg}
+          alt=""
+          className={`w-full min-w-full min-h-screen h-auto pointer-events-none select-none object-cover`}
+        />
+      )}
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center w-full h-full">
+        <div className="absolute left-1/2 top-2/5 transform -translate-x-1/2 -translate-y-2/5 w-[111px] h-[111px] md:w-[200px] md:h-[200px] 2xl:w-[333px] 2xl:h-[333px]flex flex-col items-center">
           <motion.img
             src="/scene1/christmas_wreath.webp"
             alt="happy new year"
@@ -87,7 +103,7 @@ export default function DoorScene({ onSuccess }: Props) {
 
         {showForm && (
           <motion.form
-          onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="mt-6 bg-black/20 p-6 rounded-xl backdrop-blur-md w-auto flex flex-col items-center"
@@ -103,7 +119,7 @@ export default function DoorScene({ onSuccess }: Props) {
             {error && <p className="text-red-300 text-sm mt-2">{error}</p>}
 
             <button
-            type="submit"
+              type="submit"
               disabled={loading}
               className="mt-4 w-full bg-green-600 py-2 rounded cursor-pointer hover:bg-green-500 disabled:opacity-50"
             >
@@ -112,8 +128,7 @@ export default function DoorScene({ onSuccess }: Props) {
           </motion.form>
         )}
       </div>
-            {/* Snowfall */}
-      <Snowfall count={42} />
+      <Snowfall count={52} />
     </div>
   );
 }

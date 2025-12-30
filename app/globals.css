@@ -22,7 +22,7 @@
 html,
 body {
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .safe-area {
@@ -97,7 +97,7 @@ body {
 /* Flame animation styles */
 
 .fire-container {
-  @apply w-42.5 h-42.5 md:w-42.5 md:h-42.5 xl:w-62.5 xl:h-62.5 absolute top-1/2 -translate-y-1/2 pointer-events-none;
+  @apply w-25 h-25 md:w-42.5 md:h-42.5 xl:w-62.5 xl:h-62.5 absolute top-1/2 -translate-y-1/2 pointer-events-none;
   left:30%;
 }
 
@@ -207,17 +207,15 @@ body {
 
 /* Tree sparkle lights */
 .triangle-mask {
-  position: relative;
-
   clip-path: polygon(
-    30% 0%,
-    70% 0%, 
+    40% 0%,
+    60% 0%, 
     100% 100%, 
     0% 100% 
   );
     -webkit-clip-path: polygon(
-    30% 0%,
-    70% 0%, 
+    40% 0%,
+    60% 0%, 
     100% 100%, 
     0% 100% 
   );
@@ -284,13 +282,8 @@ body {
   0% {
     transform: translateY(-10vh) translateX(0);
   }
-
-  50% {
-    transform: translateY(50vh) translateX(calc(var(--drift) * 0.6));
-  }
-
   100% {
-    transform: translateY(110vh) translateX(var(--drift));
+    transform: translateY(111vh) translateX(var(--drift));
   }
 }
 
@@ -301,13 +294,30 @@ body {
 /* responsive */
 @media (min-width: 1400px) {
   .steam {
+    width: 80px;
+    height: 70px;
+  }
+  
+  .steam span {
+    width: 16px;
+    height: 16px;
+    filter: blur(8px);
+  }
+}
+@media (min-width: 480px) {
+  .fire-container {
+    left: 35%;
+    top: 55%;
+}
+.flame::after {
+  content: "";
+  @apply absolute left-1/2 -translate-x-1/2 bottom-0 rounded-full opacity-60;
   width: 80px;
-  height: 70px;
+  height: 60px;
+}
+.sparks {
+  width: 111px;
+  height: 90px;
 }
 
-.steam span {
-  width: 16px;
-  height: 16px;
-  filter: blur(8px);
-}
 }

@@ -32,7 +32,7 @@ export default function FairySparkles({ count = 30 }: { count?: number }) {
   );
 
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden z-20">
+    <div className="pointer-events-none w-full h-full overflow-x-hidden">
       {sparkles.map((s) => {
         const style: SparkleStyle = {
           left: `${s.left}%`,
