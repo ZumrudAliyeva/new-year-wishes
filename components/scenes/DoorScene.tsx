@@ -33,7 +33,7 @@ export default function DoorScene({ onSuccess }: Props) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (name.trim().length < 2) {
-      setError("Adın belə qısa ola bilməz 🙂");
+      setError("This is not your name, is it? 🙂");
       return;
     }
 
@@ -91,7 +91,7 @@ export default function DoorScene({ onSuccess }: Props) {
         {!showForm && (
           <div className="absolute left-0 md:left-3/5 top-1/2 w-full md:w-2/3 transform md:-translate-x-1/2 -translate-y-1/2 flex flex-col items-center space-y-4">
             <p className=" py-2 px-4 text-sm order-2 md:order-1  bg-black/20 backdrop-blur-md">
-              Zəngi bas 👆
+              Ring the bell 👆
             </p>
             <motion.button
               whileTap={{ scale: 0.95 }}
@@ -108,12 +108,12 @@ export default function DoorScene({ onSuccess }: Props) {
             animate={{ opacity: 1, y: 0 }}
             className="mt-6 bg-black/20 p-6 rounded-xl backdrop-blur-md w-auto flex flex-col items-center"
           >
-            <p className="mb-2">Kimdir, qonağım? ✨</p>
+            <p className="mb-2">Who is my guest? ✨</p>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full px-3 py-2 rounded text-white bg-black/10 focus:outline-none backdrop-blur-md"
-              placeholder="Adın..."
+              placeholder="Your name..."
             />
 
             {error && <p className="text-red-300 text-sm mt-2">{error}</p>}
@@ -123,7 +123,7 @@ export default function DoorScene({ onSuccess }: Props) {
               disabled={loading}
               className="mt-4 w-full bg-green-600 py-2 rounded cursor-pointer hover:bg-green-500 disabled:opacity-50"
             >
-              {loading ? "Gözlə..." : "İçəri keç 😊"}
+              {loading ? "Waiting..." : "Enter 😊"}
             </button>
           </motion.form>
         )}

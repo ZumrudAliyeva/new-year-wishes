@@ -40,17 +40,17 @@ export default function RoomScene({
   const foodOptions = [
     {
       name: "Coffee and Cookie",
-      text: "Kofe sənə enerji və cəsarət gətirəcək.",
+      text: "Coffee will give you energy and courage.",
       img: "/scene2/coffee_cookie.webp",
     },
     {
       name: "Tea and Dessert",
-      text: "Çay sənə sakitlik və doğmalıq gətirəcək.",
+      text: "Tea will give you tranquility and warmth.",
       img: "/scene2/tea_cake.webp",
     },
     {
       name: "Hot Wine and Chocolate",
-      text: "İsti şərab qarşında yeni yollar açacaq.",
+      text: "Hot wine will open new doors for you.",
       img: "/scene2/glintwine_chokolate.webp",
     },
   ];
@@ -90,13 +90,13 @@ export default function RoomScene({
         )}
         <p
           className={`
-          w-3/4 max-w-[500px] absolute top-8 left-1/2 -translate-x-1/2
+          w-3/4 max-w-[500px] absolute top-30 left-1/2 -translate-x-1/2
           bg-black/20 px-6 py-4 rounded-xl backdrop-blur-md text-center
           transition-opacity duration-300
           ${introVisible ? "opacity-100" : "opacity-0 pointer-events-none"}
           `}
         >
-          Xoş gəldin, {userName}! Səni burada görmək çox xoşdur. ♥️
+          Welcome, {userName}! It's so nice to see you here. ♥️
         </p>
         {!isPortrait && (
           <div className="absolute z-20 left-[-3%] top-0 w-1/4 h-full min-h-screen triangle-mask">

@@ -57,7 +57,7 @@ useEffect(() => {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Xəta baş verdi");
+      if (!res.ok) throw new Error(data.error || "Something went wrong");
 
       setSelectedFortunes(prev => [...prev, data.fortune]);
     } catch {
@@ -95,12 +95,12 @@ useEffect(() => {
   `}
 >
       <p className={`
-         w-11/12 md:w-3/4 max-w-[500px] absolute top-8 left-1/2 -translate-x-1/2
+         w-11/12 md:w-3/4 max-w-[500px] absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2
           bg-black/20 p-6 rounded-xl backdrop-blur-md text-center
           transition-opacity duration-700
           ${introVisible ? "opacity-100" : "opacity-0 pointer-events-none"}
         `}>
-        Dilək dilə, hədiyyə torbasına toxun və yeni il üçün mesajını al. 3 dilək haqqın var.
+        Make a wish, touch the sack, and receive your fortune! 🎁✨ You can make 3 wishes.
       </p>
       <div className={`${isPortrait ? "w-10/12" : "w-1/2"} absolute bottom_position left-1/2 transform -translate-x-1/2 flex gap-8 items-end justify-end`}>
         <div className="relative w-[160px] md:w-[200px] xl:w-[333px]">
@@ -114,7 +114,7 @@ useEffect(() => {
             disabled={loading || selectedFortunes.length >= 3}
             className="bg-transparent text-white/0 px-4 py-2 rounded w-full h-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer"
           >
-            {loading ? "Gözlə..." : "toxun"}
+            {loading ? "Waiting..." : "Touch the sack 🎁"}
           </button>
         </div>
       </div>
@@ -140,7 +140,7 @@ useEffect(() => {
           {!sent ? (
             <>
               <h3 className="">
-                Zumrudə isə yeni il mesajını sən göndər 🎁
+                Now you can send a Newyear message to Zumrud 🎁
               </h3>
               <form onSubmit={handleSendMessage}>
               <textarea
@@ -154,13 +154,13 @@ useEffect(() => {
                 disabled={sending || !message.trim()}
                 className="w-full mt-4 bg-green-600 text-white px-4 py-2 rounded cursor-pointer"
               >
-                {sending ? "Göndərilir..." : "Göndər"}
+                {sending ? "Sending..." : "Send"}
               </button>
               </form>
             </>
           ) : (
             <p className="mt-4 text-white">
-              Təşəkkür edirəm, {userName}. Yeni il səni diləklərinlə qovuşdursun.✨
+              Thank you, {userName}. May the new year welcome you with your wishes.✨
             </p>
           )}
         </div>
