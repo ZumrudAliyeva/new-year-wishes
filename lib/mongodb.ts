@@ -2,37 +2,37 @@ import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI as string;
 
-console.log("MONGODB_URI:", process.env.MONGODB_URI);
-
 if (!MONGODB_URI) {
-  throw new Error("MONGODB_URI not defined");
+  throw new Error("MONGODB_URI is missing");
 }
 
-interface MongooseCache {
+// 👇 global cache type
+type MongooseCache = {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
-}
-
-declare global {
-  var mongoose: MongooseCache;
-}
-
-const cached: MongooseCache = global.mongoose || {
-  conn: null,
-  promise: null,
 };
 
-global.mongoose = cached;
+const globalWithMongoose = global as typeof globalThis & {
+  mongoose: MongooseCache;
+};
+
+if (!globalWithMongoose.mongoose) {
+  globalWithMongoose.mongoose = { conn: null, promise: null };
+}
 
 export async function connectDB() {
-  if (cached.conn) return cached.conn;
-
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI, {
-      bufferCommands: false,
-    });
+  // 1. already connected
+  if (globalWithMongoose.mongoose.conn) {
+    return globalWithMongoose.mongoose.conn;
   }
 
-  cached.conn = await cached.promise;
-  return cached.conn;
+  // 2. create connection only once
+  if (!globalWithMongoose.mongoose.promise) {
+    globalWithMongoose.mongoose.promise = mongoose.connect(MONGODB_URI);
+  }
+
+  globalWithMongoose.mongoose.conn =
+    await globalWithMongoose.mongoose.promise;
+
+  return globalWithMongoose.mongoose.conn;
 }
