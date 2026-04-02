@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎉 New Year Wishes — Interactive MERN App
 
-## Getting Started
+An interactive full-stack web application designed as a sequence-based user experience for generating personalized “fortune-style” New Year messages.
 
-First, run the development server:
+## 🚀 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project focuses on creating an engaging, user-driven experience beyond static interfaces.  
+Users navigate through a guided sequence of steps to generate and share personalized messages.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Step-by-step interactive user flow
+- Dynamic message generation
+- Clean and minimal UI design
+- Responsive layout across devices
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧠 What I focused on
 
-## Learn More
+- Designing a smooth, intuitive interaction flow
+- Structuring UI logic for multi-step user experience
+- Building a clean frontend with reusable components
+- Integrating backend logic for dynamic content
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Frontend:**
+Next.js, Tailwind CSS  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Backend:**
+Node.js, MongoDB  
 
-## Deploy on Vercel
+## 📌 Highlights
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Full-stack implementation from scratch
+- Focus on interaction design, not just UI
+- Demonstrates ability to build user-driven experiences
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔗 Live Demo
+
+👉 [View project](https://newyear-makeawish.vercel.app/)
+
+---
