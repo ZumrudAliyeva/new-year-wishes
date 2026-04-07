@@ -6,7 +6,6 @@ if (!MONGODB_URI) {
   throw new Error("MONGODB_URI is missing");
 }
 
-// 👇 global cache type
 type MongooseCache = {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -21,12 +20,10 @@ if (!globalWithMongoose.mongoose) {
 }
 
 export async function connectDB() {
-  // 1. already connected
   if (globalWithMongoose.mongoose.conn) {
     return globalWithMongoose.mongoose.conn;
   }
 
-  // 2. create connection only once
   if (!globalWithMongoose.mongoose.promise) {
     globalWithMongoose.mongoose.promise = mongoose.connect(MONGODB_URI);
   }

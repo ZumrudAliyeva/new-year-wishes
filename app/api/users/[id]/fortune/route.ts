@@ -7,7 +7,7 @@ export async function POST(req: Request, context: { params: Promise<{ id: string
   await connectDB();
 
   const { params } = context;
-  const { id: userId } = await params; // ✅ Promise unwrap edildi
+  const { id: userId } = await params;
   if (!userId) {
     return NextResponse.json({ error: "Missing userId" }, { status: 400 });
   }

@@ -1,4 +1,3 @@
-// models/Fortune.ts
 import { Schema, model, models } from "mongoose";
 
 export interface IFortune {

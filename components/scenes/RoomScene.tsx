@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import FortuneScene from "./FortuneScene";
 import FairySparkles from "./FairySparkles";
 import { useIsPortrait } from "@/hooks/useOriantation";
-import { div } from "framer-motion/client";
 
 interface Props {
   userId: string;
@@ -64,7 +63,7 @@ export default function RoomScene({
       const res = await fetch(`/api/users/${userId}/food`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ food }), // backend da PATCH req qəbul edir
+        body: JSON.stringify({ food }),
       });
 
       if (!res.ok) throw new Error("Food seçimi göndərilə bilmədi");
@@ -80,7 +79,6 @@ export default function RoomScene({
   return (
     <>
       <div className="relative h-full min-h-screen w-full text-white overflow-hidden">
-        {/* Background + otaq elementləri */}
         {mounted && (
           <img
             src={bg_room}
@@ -110,7 +108,6 @@ export default function RoomScene({
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full md:w-10/12"
           />
         )}
-        {/* Fire animation */}
         <div className="fire-container">
           <div className="flame">
             <span></span>
@@ -128,35 +125,67 @@ export default function RoomScene({
             <i></i>
           </div>
         </div>
-        {/* Food seçimləri - fade out yalnız digərlərinə */}
         <div className="absolute top-0 left-0 w-full h-full">
-        {isPortrait ? (
-          <div className="w-full h-full">
-            <div className="absolute left-1/2 top-1/2 w-11/12 transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-6">
-              {foodOptions.map((food) => {
-                if (selectedFood) return null;
-                return (
-                  <p
-                    key={food.name}
-                    className="w-full text-sm text-center mb-2 p-4 bg-black/20 backdrop-blur-md rounded-xl"
-                  >
-                    {food.text}
-                  </p>
-                );
-              })}
+          {isPortrait ? (
+            <div className="w-full h-full">
+              <div className="absolute left-1/2 top-1/2 w-11/12 transform -translate-y-1/2 -translate-x-1/2 flex flex-col gap-6">
+                {foodOptions.map((food) => {
+                  if (selectedFood) return null;
+                  return (
+                    <p
+                      key={food.name}
+                      className="w-full text-sm text-center mb-2 p-4 bg-black/20 backdrop-blur-md rounded-xl"
+                    >
+                      {food.text}
+                    </p>
+                  );
+                })}
+              </div>
+              <div className="absolute bottom_position left-1/2 md:w-11/12 transform -translate-x-1/2 flex gap-2 px-2 w-full items-end justify-center">
+                {foodOptions.map((food) => {
+                  if (selectedFood) return null;
+                  return (
+                    <motion.div
+                      key={food.name}
+                      className="cursor-pointer relative w-1/3 flex flex-col justify-end items-center"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 1.0 }}
+                      onClick={() => handleSelectFood(food.name)}
+                    >
+                      <div className="relative w-full">
+                        <div className="steam">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
+                        <img
+                          src={food.img}
+                          alt={food.name}
+                          className="w-11/12 mt-auto"
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
-            <div className="absolute bottom_position left-1/2 md:w-11/12 transform -translate-x-1/2 flex gap-2 px-2 w-full items-end justify-center">
+          ) : (
+            <div className="absolute bottom_position left-1/2 w-10/12 transform -translate-x-1/2 flex gap-6 md:gap-8 md:w-full items-end justify-center">
               {foodOptions.map((food) => {
                 if (selectedFood) return null;
                 return (
                   <motion.div
                     key={food.name}
-                    className="cursor-pointer relative w-1/3 flex flex-col justify-end items-center"
+                    className="cursor-pointer relative w-[120px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] flex flex-col justify-end items-center"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 1.0 }}
                     onClick={() => handleSelectFood(food.name)}
                   >
-                    <div className="relative w-full">
+                    <p className="m-w-[180px] text-sm text-center mb-3 p-4 bg-black/20 backdrop-blur-md rounded-xl">
+                      {food.text}
+                    </p>
+                    <div className="relative w-[120px] md:w-[180px] xl:w-[222px] 2xl:w-[333px]">
                       <div className="steam">
                         <span></span>
                         <span></span>
@@ -166,75 +195,42 @@ export default function RoomScene({
                       <img
                         src={food.img}
                         alt={food.name}
-                        className="w-11/12 mt-auto"
+                        className="w-[111px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] mt-auto"
                       />
                     </div>
                   </motion.div>
                 );
               })}
             </div>
-          </div>
-        ) : (
-          <div className="absolute bottom_position left-1/2 w-10/12 transform -translate-x-1/2 flex gap-6 md:gap-8 md:w-full items-end justify-center">
-            {foodOptions.map((food) => {
-              if (selectedFood) return null;
-              return (
-                <motion.div
-                  key={food.name}
-                  className="cursor-pointer relative w-[120px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] flex flex-col justify-end items-center"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 1.0 }}
-                  onClick={() => handleSelectFood(food.name)}
-                >
-                  <p className="m-w-[180px] text-sm text-center mb-3 p-4 bg-black/20 backdrop-blur-md rounded-xl">
-                    {food.text}
-                  </p>
-                  <div className="relative w-[120px] md:w-[180px] xl:w-[222px] 2xl:w-[333px]">
-                    <div className="steam">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                    <img
-                      src={food.img}
-                      alt={food.name}
-                      className="w-[111px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] mt-auto"
-                    />
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        )}
-        {/* Seçilən food hələ stol üzərində qalır */}
-        <div className={`${isPortrait ? "w-10/12" : "w-1/2"} absolute bottom_position left-1/2 transform -translate-x-1/2 flex gap-8 items-end`}>
-          {selectedFood && (
-            <div className="cursor-pointer relative w-[130px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] flex flex-col justify-end items-center">
-              <div className="steam">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+          )}
+          <div
+            className={`${isPortrait ? "w-10/12" : "w-1/2"} absolute bottom_position left-1/2 transform -translate-x-1/2 flex gap-8 items-end`}
+          >
+            {selectedFood && (
+              <div className="cursor-pointer relative w-[130px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] flex flex-col justify-end items-center">
+                <div className="steam">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <img
+                  src={foodOptions.find((f) => f.name === selectedFood)?.img}
+                  alt={selectedFood}
+                  className="w-[130px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] mt-auto"
+                />
               </div>
-              <img
-                src={foodOptions.find((f) => f.name === selectedFood)?.img}
-                alt={selectedFood}
-                className="w-[130px] md:w-[180px] xl:w-[222px] 2xl:w-[333px] mt-auto"
+            )}
+          </div>
+          {showFortune && userId && (
+            <div className="absolute inset-0 flex items-end justify-center pb-24">
+              <FortuneScene
+                userId={userId}
+                userName={userName}
+                onFinish={onStoryFinish}
               />
             </div>
           )}
-        </div>
-        {/* Fortune torbası overlay */}
-        {showFortune && userId && (
-          <div className="absolute inset-0 flex items-end justify-center pb-24">
-            <FortuneScene
-              userId={userId}
-              userName={userName}
-              onFinish={onStoryFinish}
-            />
-          </div>
-        )}
         </div>
       </div>
     </>

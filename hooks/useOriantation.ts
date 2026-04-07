@@ -20,7 +20,6 @@ export function useIsPortrait() {
       setIsPortrait(height > width);
     };
 
-    // initial fix (Safari URL bar delay)
     updateOrientation();
 
     // resize

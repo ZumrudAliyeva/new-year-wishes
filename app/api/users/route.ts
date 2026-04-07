@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({
-      userId: user._id.toString(), // ⚠️ ÇOX VACİB
+      userId: user._id.toString(), 
       name: user.name,
     });
   } catch (err) {
